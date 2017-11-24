@@ -1,10 +1,31 @@
 // APP
 var storage;
+const HOST = "http://demo9792543.mockable.io/api/v1";
+
 window.onload = function () {
     storage = window.localStorage;
     var usuario = new Usuario(JSON.parse(storage.getItem("usuariosCadastrados")) || []),
         sendForm = document.getElementById("sendForm"),
         formulario = document.getElementById("formulario");
+
+    try {
+        $GET(HOST + "/usuario", function ($return) {
+            var lista = JSON.parse($return);
+            var html = "";
+
+            for (i in lista) {
+                html += `<tr>\
+                            <td scope="col">${lista[i].name}</td>\
+                            <td scope="col">${lista[i].email}</td>\
+                            <td scope="col">${lista[i].phone}</td>\
+                        </tr>` ;
+            }
+
+            usuario.showUsuario("tabela_usuarios", html);
+        });
+    } catch (exec) {
+        console.log(exec);
+    }
 
     sendForm.addEventListener("mousedown", function () {
         if (formulario.reportValidity()) {
@@ -35,43 +56,3 @@ window.onload = function () {
     });
 }
 
-
-/**
- * 
- * @param {*}  
- */
-function alertVibrate($time) {
-    if (!!navigator.vibrate) {
-        navigator.vibrate($time);
-    };
-}
-
-function $GET($URL) {
-    var xhttp,
-        callbackSuccess = arguments[1] || false ,
-        callbackError= arguments[2] || false;        
-
-    if (window.XMLHttpRequest) {
-        xhttp = new XMLHttpRequest();
-    } else {
-        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    
-    xhttp.onprogress = function (oEvent) {
-        console.log("Aguarde estamos carregando...");
-    }
-    xhttp.onerror = function () {
-        if(!!callbackSuccess) { callbackError(this.response) };
-    }
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            if(this.status < 400){
-                if(!!callbackSuccess) { callbackSuccess(this.response) };
-            }else if(this.status >= 400){
-                if(!!callbackSuccess) { callbackError(this.response) };
-            }
-        }
-    };
-    xhttp.open("GET", $URL, true);
-    xhttp.send();
-}

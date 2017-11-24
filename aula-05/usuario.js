@@ -19,3 +19,9 @@ Usuario.prototype.searchUsuario = function ($string) {
     });
     return filtrados;
 }
+
+Usuario.prototype.showUsuario = function ($tableID, $usuario) {
+ 
+
+
+}

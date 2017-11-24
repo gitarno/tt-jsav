@@ -17,7 +17,7 @@ window.onload = function () {
     } catch (exec) {
         console.log(exec);
     }
-
+    //LIGANDO os bts
     sendForm.addEventListener("mousedown", function () {
         if (formulario.reportValidity()) {
             var form_usuario = {
@@ -39,15 +39,17 @@ window.onload = function () {
         console.log(usuario.cadastrados);
     });
 
-    var searchUsuario = document.getElementById("searchUsuario"),
-        formulario_search = document.getElementById("form_search");
-
-    searchUsuario.addEventListener("mousedown", function () {
+    var formulario_search = document.getElementById("form_search");
+    formulario_search.addEventListener("keydown", function () {
         var filtrados = usuario.searchUsuario(formulario_search.search.value);
         usuario.showUsuario("tabela_usuarios", filtrados);
-
     });
-
+    
+    // searchUsuario = document.getElementById("searchUsuario");
+    // searchUsuario.addEventListener("mousedown", function () {
+    //     var filtrados = usuario.searchUsuario(formulario_search.search.value);
+    //     usuario.showUsuario("tabela_usuarios", filtrados);
+    // });
 
 }
 

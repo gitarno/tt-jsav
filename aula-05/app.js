@@ -4,24 +4,15 @@ const HOST = "http://demo9792543.mockable.io/api/v1";
 
 window.onload = function () {
     storage = window.localStorage;
-    var usuario = new Usuario(JSON.parse(storage.getItem("usuariosCadastrados")) || []),
+    var usuario,
         sendForm = document.getElementById("sendForm"),
         formulario = document.getElementById("formulario");
 
     try {
         $GET(HOST + "/usuario", function ($return) {
             var lista = JSON.parse($return);
-            var html = "";
-
-            for (i in lista) {
-                html += `<tr>\
-                            <td scope="col">${lista[i].name}</td>\
-                            <td scope="col">${lista[i].email}</td>\
-                            <td scope="col">${lista[i].phone}</td>\
-                        </tr>` ;
-            }
-
-            usuario.showUsuario("tabela_usuarios", html);
+            usuario = new Usuario( lista || []);
+            usuario.showUsuario("tabela_usuarios", lista);
         });
     } catch (exec) {
         console.log(exec);
@@ -52,7 +43,11 @@ window.onload = function () {
         formulario_search = document.getElementById("form_search");
 
     searchUsuario.addEventListener("mousedown", function () {
-        console.log(usuario.searchUsuario(formulario_search.search.value));
+        var filtrados = usuario.searchUsuario(formulario_search.search.value);
+        usuario.showUsuario("tabela_usuarios", filtrados);
+
     });
+
+
 }
 

@@ -21,5 +21,15 @@ Usuario.prototype.searchUsuario = function ($string) {
 }
 
 Usuario.prototype.showUsuario = function ($tableID, $usuario) {
-    document.getElementById($tableID).innerHTML = $usuario;
+    var html = "";
+
+    for (i in $usuario) {
+        html += '<tr>\
+                    <td scope="col">'+$usuario[i].name+'</td>\
+                    <td scope="col">'+$usuario[i].email+'</td>\
+                    <td scope="col">'+$usuario[i].phone+'</td>\
+                </tr>';
+    }
+
+    document.getElementById($tableID).innerHTML = html;
 }

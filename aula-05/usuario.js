@@ -36,6 +36,9 @@ Usuario.prototype.showUsuario = function ($tableID, $usuario) {
         tr.addEventListener("mousedown",function(){
             $GET("https://randomuser.me/api",function($return){
                 console.log($return);
+
+                $('#modal_usuario_body').html(JSON.stringify($return));  
+                $("#modal_usuario").modal("show");
             })
             // $GET(HOST + "/usuario/"+ 123,function($return){
             //     console.log($return);

@@ -19,7 +19,7 @@ function $GET($URL) {
     } else {
         xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    
+    xhttp.setHeader
     xhttp.onprogress = function (oEvent) {
         console.log("Aguarde estamos carregando...");
     }

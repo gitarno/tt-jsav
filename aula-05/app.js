@@ -17,6 +17,9 @@ window.onload = function () {
     } catch (exec) {
         console.log(exec);
     }
+
+    
+
     //LIGANDO os bts
     sendForm.addEventListener("mousedown", function () {
         if (formulario.reportValidity()) {

@@ -24,13 +24,24 @@ Usuario.prototype.searchUsuario = function ($string) {
 }
 
 Usuario.prototype.showUsuario = function ($tableID, $usuario) {
-    var html = "";
+    var tabela = document.getElementById($tableID);
+    tabela.innerHTML = "";
+
     for (i in $usuario) {
-        html += '<tr>\
-                    <td scope="col">'+$usuario[i].name+'</td>\
+        var tr = document.createElement("tr");
+        tr.innerHTML = '<td scope="col">'+$usuario[i].name+'</td>\
                     <td scope="col">'+$usuario[i].email+'</td>\
-                    <td scope="col">'+$usuario[i].phone+'</td>\
-                </tr>';
+                    <td scope="col">'+$usuario[i].phone+'</td>';
+        
+        tr.addEventListener("mousedown",function(){
+            $GET("https://randomuser.me/api",function($return){
+                console.log($return);
+            })
+            // $GET(HOST + "/usuario/"+ 123,function($return){
+            //     console.log($return);
+            // })
+        });
+        
+        tabela.appendChild(tr);
     }
-    document.getElementById($tableID).innerHTML = html;
 }

@@ -21,9 +21,9 @@ window.onload = function () {
     sendForm.addEventListener("mousedown", function () {
         if (formulario.reportValidity()) {
             var form_usuario = {
-                nome: formulario.nome.value,
+                name: formulario.nome.value,
                 email: formulario.email.value,
-                tel: formulario.tel.value
+                phone: formulario.tel.value
             };
             usuario.addUsuario(form_usuario);
 
@@ -31,6 +31,9 @@ window.onload = function () {
             formulario.nome.value = "";
             formulario.email.value = "";
             formulario.tel.value = "";
+            
+            //BOOTSTRAP
+            $('#cadastro').modal('hide');
 
         } else {
             alertVibrate(1000);
@@ -41,6 +44,7 @@ window.onload = function () {
 
     var formulario_search = document.getElementById("form_search");
     formulario_search.addEventListener("keydown", function () {
+        //
         var filtrados = usuario.searchUsuario(formulario_search.search.value);
         usuario.showUsuario("tabela_usuarios", filtrados);
     });
